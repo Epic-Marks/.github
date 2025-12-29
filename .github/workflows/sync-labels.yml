@@ -9,34 +9,67 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync-repos:
+  sync-labels:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        repo:
-          - Epic-Marks/ops-infra-repo
-          - Epic-Marks/docs
-          - Epic-Marks/plugin-barcode-labels
-          - Epic-Marks/plugin-business-timer
-          - Epic-Marks/plugin-ups-rates
-          - Epic-Marks/plugin-epic-hq
-          - Epic-Marks/plugin-ssaw
-          - Epic-Marks/ssaw-app
-          - Epic-Marks/plugin-gang-sheet
-          - Epic-Marks/gang-sheet-builder
-          - Epic-Marks/plugin-chatbot
-          - Epic-Marks/theme
-          - Epic-Marks/plugin-square-loyalty
-          - Epic-Marks/em-chat-bot
     steps:
       - name: Checkout .github repo
         uses: actions/checkout@v4
 
-      - name: Sync labels to ${{ matrix.repo }}
-        uses: EndBug/label-sync@v2
-        with:
-          config-file: labels.yml
-          delete-other-labels: false
-          token: ${{ secrets.LABEL_SYNC_TOKEN }}
-          repository: ${{ matrix.repo }}
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Sync labels to all repos
+        env:
+          GH_TOKEN: ${{ secrets.LABEL_SYNC_TOKEN }}
+        run: |
+          REPOS=(
+            "Epic-Marks/ops-infra-repo"
+            "Epic-Marks/docs"
+            "Epic-Marks/plugin-barcode-labels"
+            "Epic-Marks/plugin-business-timer"
+            "Epic-Marks/plugin-ups-rates"
+            "Epic-Marks/plugin-epic-hq"
+            "Epic-Marks/plugin-ssaw"
+            "Epic-Marks/ssaw-app"
+            "Epic-Marks/plugin-gang-sheet"
+            "Epic-Marks/gang-sheet-builder"
+            "Epic-Marks/plugin-chatbot"
+            "Epic-Marks/theme"
+            "Epic-Marks/plugin-square-loyalty"
+            "Epic-Marks/em-chat-bot"
+          )
+
+          # Read labels from YAML file
+          LABEL_COUNT=$(yq '. | length' labels.yml)
+          echo "Found $LABEL_COUNT labels to sync"
+
+          for REPO in "${REPOS[@]}"; do
+            echo ""
+            echo "=========================================="
+            echo "Syncing labels to $REPO"
+            echo "=========================================="
+
+            for i in $(seq 0 $((LABEL_COUNT - 1))); do
+              NAME=$(yq ".[$i].name" labels.yml)
+              COLOR=$(yq ".[$i].color" labels.yml)
+              DESC=$(yq ".[$i].description" labels.yml)
+
+              # Try to update existing label, create if it doesn't exist
+              if gh label edit "$NAME" --repo "$REPO" --color "$COLOR" --description "$DESC" 2>/dev/null; then
+                echo "  ✓ Updated: $NAME"
+              else
+                if gh label create "$NAME" --repo "$REPO" --color "$COLOR" --description "$DESC" 2>/dev/null; then
+                  echo "  + Created: $NAME"
+                else
+                  echo "  ! Failed: $NAME"
+                fi
+              fi
+            done
+          done
+
+          echo ""
+          echo "=========================================="
+          echo "Label sync complete!"
+          echo "=========================================="
