@@ -1,0 +1,41 @@
+name: Sync Labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'labels.yml'
+  workflow_dispatch:
+
+jobs:
+  sync-repos:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo:
+          - Epic-Marks/ops-infra-repo
+          - Epic-Marks/docs
+          - Epic-Marks/plugin-barcode-labels
+          - Epic-Marks/plugin-business-timer
+          - Epic-Marks/plugin-ups-rates
+          - Epic-Marks/plugin-epic-hq
+          - Epic-Marks/plugin-ssaw
+          - Epic-Marks/ssaw-app
+          - Epic-Marks/plugin-gang-sheet
+          - Epic-Marks/gang-sheet-builder
+          - Epic-Marks/plugin-chatbot
+          - Epic-Marks/theme
+          - Epic-Marks/plugin-square-loyalty
+          - Epic-Marks/em-chat-bot
+    steps:
+      - name: Checkout .github repo
+        uses: actions/checkout@v4
+
+      - name: Sync labels to ${{ matrix.repo }}
+        uses: EndBug/label-sync@v2
+        with:
+          config-file: labels.yml
+          delete-other-labels: false
+          token: ${{ secrets.LABEL_SYNC_TOKEN }}
+          source-repo: ${{ matrix.repo }}

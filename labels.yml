@@ -1,0 +1,229 @@
+# ===================
+# SEVERITY
+# ===================
+- name: critical
+  color: "B60205"
+  description: "Critical - must fix before prod"
+
+- name: high
+  color: "D93F0B"
+  description: "High priority issue"
+
+- name: medium
+  color: "FBCA04"
+  description: "Medium priority issue"
+
+- name: low
+  color: "0E8A16"
+  description: "Low priority / nice to have"
+
+# ===================
+# STATUS
+# ===================
+- name: in-progress
+  color: "0052CC"
+  description: "Actively being worked on"
+
+- name: blocked
+  color: "D93F0B"
+  description: "Blocked by another issue or external factor"
+
+- name: needs-review
+  color: "FBCA04"
+  description: "Ready for review"
+
+- name: wontfix
+  color: "FFFFFF"
+  description: "Will not be addressed"
+
+- name: duplicate
+  color: "CFD3D7"
+  description: "Duplicate of another issue"
+
+- name: backlog
+  color: "D4C5F9"
+  description: "Acknowledged but not prioritized yet"
+
+# ===================
+# TYPE
+# ===================
+- name: bug
+  color: "D73A4A"
+  description: "Something isn't working"
+
+- name: feature
+  color: "A2EEEF"
+  description: "New feature request"
+
+- name: enhancement
+  color: "84B6EB"
+  description: "Improvement to existing functionality"
+
+- name: documentation
+  color: "0075CA"
+  description: "Documentation updates needed"
+
+- name: question
+  color: "D876E3"
+  description: "Needs clarification or discussion"
+
+- name: refactor
+  color: "FEF2C0"
+  description: "Code cleanup, no functional change"
+
+# ===================
+# SECURITY & COMPLIANCE
+# ===================
+- name: security
+  color: "5319E7"
+  description: "Security vulnerability or concern"
+
+- name: hardcoded-url
+  color: "1D76DB"
+  description: "Hardcoded URL needs env variable"
+
+- name: prod-readiness
+  color: "006B75"
+  description: "Production readiness issue"
+
+- name: ssl-tls
+  color: "5319E7"
+  description: "SSL/TLS certificate or config"
+
+- name: permissions
+  color: "5319E7"
+  description: "File or user permission issue"
+
+# ===================
+# INFRASTRUCTURE / LAMP
+# ===================
+- name: apache
+  color: "D22128"
+  description: "Apache/webserver configuration"
+
+- name: mysql
+  color: "4479A1"
+  description: "MySQL/database issue"
+
+- name: php
+  color: "777BB4"
+  description: "PHP configuration or code"
+
+- name: linux
+  color: "FCC624"
+  description: "Linux/server hardening"
+
+- name: dns
+  color: "1D76DB"
+  description: "DNS configuration"
+
+- name: backup
+  color: "006B75"
+  description: "Backup and recovery"
+
+- name: monitoring
+  color: "0E8A16"
+  description: "Logging, alerts, monitoring"
+
+- name: performance
+  color: "FBCA04"
+  description: "Performance optimization"
+
+# ===================
+# WORDPRESS / WOOCOMMERCE
+# ===================
+- name: wordpress
+  color: "21759B"
+  description: "WordPress core issue"
+
+- name: woocommerce
+  color: "96588A"
+  description: "WooCommerce configuration"
+
+- name: plugin
+  color: "21759B"
+  description: "Plugin-related issue"
+
+- name: theme
+  color: "21759B"
+  description: "Theme-related issue"
+
+# ===================
+# ECOMMERCE / EPIC MARKS SPECIFIC
+# ===================
+- name: square
+  color: "3E4348"
+  description: "Square POS/payments integration"
+
+- name: shipping
+  color: "F9D0C4"
+  description: "Shipping configuration or rates"
+
+- name: inventory
+  color: "BFD4F2"
+  description: "Inventory sync or stock issues"
+
+- name: orders
+  color: "96588A"
+  description: "Order processing issues"
+
+- name: checkout
+  color: "D93F0B"
+  description: "Checkout flow issues"
+
+- name: email
+  color: "1D76DB"
+  description: "Transactional email issues"
+
+- name: pricing
+  color: "0E8A16"
+  description: "Pricing or tax calculation"
+
+# ===================
+# MIGRATION
+# ===================
+- name: migration
+  color: "F9D0C4"
+  description: "Shopify to WooCommerce migration"
+
+- name: data-import
+  color: "BFD4F2"
+  description: "Data import/export task"
+
+# ===================
+# DEVELOPMENT
+# ===================
+- name: api
+  color: "1D76DB"
+  description: "API endpoint or integration"
+
+- name: ui
+  color: "84B6EB"
+  description: "User interface issue"
+
+- name: testing
+  color: "BFD4F2"
+  description: "Needs testing or test coverage"
+
+- name: devops
+  color: "006B75"
+  description: "CI/CD, deployment, infrastructure"
+
+# ===================
+# PRINTING SPECIFIC
+# ===================
+- name: dtf
+  color: "FF6B6B"
+  description: "DTF printing workflow"
+
+- name: gang-sheet
+  color: "4ECDC4"
+  description: "Gang sheet builder issues"
+
+- name: artwork
+  color: "FFE66D"
+  description: "Artwork processing or validation"
+
+- name: rip-software
+  color: "95E1D3"
+  description: "RIP software integration"
