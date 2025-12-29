@@ -12,6 +12,7 @@ jobs:
   sync-repos:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         repo:
           - Epic-Marks/ops-infra-repo
@@ -38,4 +39,4 @@ jobs:
           config-file: labels.yml
           delete-other-labels: false
           token: ${{ secrets.LABEL_SYNC_TOKEN }}
-          source-repo: ${{ matrix.repo }}
+          repository: ${{ matrix.repo }}
