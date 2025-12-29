@@ -72,6 +72,21 @@
   description: "Code cleanup, no functional change"
 
 # ===================
+# REQUEST SOURCE
+# ===================
+- name: feature-request
+  color: "22C55E"
+  description: "New feature request from any source"
+
+- name: customer-request
+  color: "F59E0B"
+  description: "Request originating from a customer"
+
+- name: internal-request
+  color: "8B5CF6"
+  description: "Request from internal team"
+
+# ===================
 # SECURITY & COMPLIANCE
 # ===================
 - name: security
